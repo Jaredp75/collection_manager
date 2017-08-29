@@ -1,15 +1,4 @@
-const express = require('express');
-const mustache = require('mustache');
-const mustacheExpress = require('mustache-express');
 const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
-
-
-//const Recipe = require("./models/recipe")
-
-const DUPLICATE_RECORD_ERROR = 11000;
-
-//const mongoose = require('mongoose');
 
 const playerSchema = new mongoose.Schema({
     name: { type: String, required: true, unique: true },
@@ -28,6 +17,6 @@ const Player = mongoose.model('Player', playerSchema);
 module.exports = Player;
 
 
-var player = new Player({name: "Andre Iguodala"});
-console.log(player.toObject());
-player.save();
+//var player = new Player({name: "Andre Iguodala"});
+//console.log(player.toObject());
+//player.save();
