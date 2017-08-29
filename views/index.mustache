@@ -1,0 +1,41 @@
+<h1>Players</h1>
+
+<p>
+  <a href="/new/">Add New Players</a>
+</p>
+
+{{#playerdb}}
+  <div class="player">
+  <h2>
+    <a href="/{{_id}}">
+      {{playerdb}}
+    </a>
+  </h2>
+  <dl>
+  {{#age}}
+  <dt>
+    Age
+  </dt>
+  <dd>
+    {{.}}
+  </dd>
+  {{/age}}
+  {{#stats}}
+  <dt>
+    Stats
+  </dt>
+  <dd>
+    {{.}}
+  </dd>
+  {{/stats}}
+  {{#team}}
+  <dt>
+    Team
+  </dt>
+  <dd>
+    {{.}}
+  </dd>
+  {{/team}}
+  </dl>
+  </div>
+{{/playerdb}}

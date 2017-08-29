@@ -1,0 +1,33 @@
+{{#playerdb}}
+  <h2>{{name}}</h2>
+
+  <ul>
+  {{#stats}}
+    <li>
+      {{RPG}} {{PPG}} {{APG}}
+    </li>
+  {{/stats}}
+  </ul>
+
+  <form action="/{{_id}}/new_stats/" method="POST">
+    <p>
+      <label for="rpg">Rebounds Per Game:</label>
+      <input type="number" name="rpg" />
+    </p>
+
+    <p>
+      <label for="ppg">Points Per Game:</label>
+      <input type="text" name="ppg" />
+    </p>
+
+    <p>
+      <label for="apg">Assists per Game:</label>
+      <input type="text" name="apg" />
+    </p>
+
+    <p>
+      <button type="submit">Add Stats</button>
+      <a href="/{{_id}}/" class="button button-danger">Back to Players</a>
+    </p>
+  </form>
+{{/playerdb}}

@@ -1,0 +1,22 @@
+{{#playerdb}}
+  <h2>{{team}}</h2>
+
+  <ol>
+  {{#team}}
+    <li>
+      {{.}}
+    </li>
+  {{/team}}
+</ol>
+
+  <form action="/{{_id}}/new_team/" method="POST">
+    <p>
+      <input type="text" name="team" placeholder="Add your team"/>
+    </p>
+
+    <p>
+      <button type="submit">Add Team</button>
+      <a href="/{{_id}}/" class="button button-danger">Back to Players</a>
+    </p>
+  </form>
+{{/playerdb}}

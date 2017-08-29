@@ -5,13 +5,15 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "script": "node app.js"
+    "script": "node server.js"
   },
   "author": "Jared Patterson",
   "license": "ISC",
   "dependencies": {
+    "bluebird": "^3.5.0",
     "body-parser": "^1.17.2",
     "express": "^4.15.4",
+    "fs": "0.0.1-security",
     "mongoose": "^4.11.9",
     "mustache": "^2.3.0",
     "mustache-express": "^1.2.5"

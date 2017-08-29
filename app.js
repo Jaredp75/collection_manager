@@ -4,6 +4,7 @@ const mustacheExpress = require('mustache-express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const fs = require('fs');
+const path = require('path');
 
 const Player = require("./models/player");
 
@@ -12,7 +13,7 @@ const DUPLICATE_RECORD_ERROR = 11000;
 
 const mongoURL = 'mongodb://localhost:27017/player';
 mongoose.connect(mongoURL, {useMongoClient: true});
-mongo.Promise = require('bluebird');
+mongoose.Promise = require('bluebird');
 
 
 const app = express();
@@ -20,7 +21,7 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.engine('mustache', mustacheExpress());
-app.set('views', path.join(_dirname, 'views'));
+app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'mustache')
 app.set('layout', 'layout');
 
@@ -37,7 +38,7 @@ app.get('/new/', function (req, res) {
 
 app.post('/new/', function (req, res) {
   Player.create(req.body)
-  .then(function (player) {
+  .then(function (playerdb) {
     res.redirect('/');
   })
   .catch(function (error) {
@@ -57,3 +58,42 @@ app.get('/:id/', function (req, res) {
     res.render("player", {player: player});
   })
 })
+
+app.get('/:id/new_player/', function (req, res) {
+  Player.findOne({_id: req.params.id}).then(function (player) {
+    res.render("new_player", {player: player});
+  })
+})
+
+app.post('/:id/new_age/', function (req, res) {
+  Player.findOne({_id: req.params.id}).then(function (player) {
+    player.ingredients.push(req.body);
+    player.save().then(function () {
+        res.render("new_age", {player: player});
+    })
+  })
+})
+
+app.get('/:id/new_team,/', function (req, res) {
+  Player.findOne({_id: req.params.id}).then(function (player) {
+    res.render("new_team", {player: player});
+  })
+})
+
+app.post('/:id/new_stats/', function (req, res) {
+  Player.findOne({_id: req.params.id}).then(function (player) {
+    player.stats.push(req.body.step);
+    player.save().then(function () {
+      res.render("new_stats", {player: player});
+    })
+  })
+})
+
+
+app.get('/', function (req, res) {
+  Player.find().then(function (player) {
+    res.render('index', {player: player});
+  })
+})
+
+module.exports = app;
