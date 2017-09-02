@@ -5,10 +5,18 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "script": "node server.js"
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jaredp75/collection_manager.git"
   },
   "author": "Jared Patterson",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Jaredp75/collection_manager/issues"
+  },
+  "homepage": "https://github.com/Jaredp75/collection_manager#readme",
   "dependencies": {
     "bluebird": "^3.5.0",
     "body-parser": "^1.17.2",
@@ -16,6 +24,7 @@
     "fs": "0.0.1-security",
     "mongoose": "^4.11.9",
     "mustache": "^2.3.0",
-    "mustache-express": "^1.2.5"
+    "mustache-express": "^1.2.5",
+    "serve-favicon": "^2.4.3"
   }
 }
