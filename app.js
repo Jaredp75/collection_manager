@@ -6,11 +6,12 @@ const bodyParser = require('body-parser');
 const fs = require('fs');
 const path = require('path');
 
-const Player = require("./models/player");
-const playerRouter = require("./routers/player");
+const Player = require('./models/player');
+const port = 3000;
+//const playerRouter = require("./routers/player");
 
 
-const DUPLICATE_RECORD_ERROR = 11000;
+//const DUPLICATE_RECORD_ERROR = 11000;
 
 
 const mongoURL = 'mongodb://localhost:27017/player';
@@ -21,14 +22,16 @@ mongoose.Promise = require('bluebird');
 const app = express();
 
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static('./static'));
+
 
 app.engine('mustache', mustacheExpress());
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'mustache')
-app.set('layout', 'layout');
+//app.set('layout', 'layout');
 
 
-app.use('/static', express.static('static'));
+
 
 
 // put routes here
@@ -37,33 +40,90 @@ app.get('/favicon.ico', function(req, res) {
   res.status(204);
 })
 
-app.get('/new/', function (req, res) {
-  res.render('new_player', {player: player});
+app.get('/add/', function (req, res) {
+  res.render('add_player');
 });
 
-
-app.post('/new/', function (req, res) {
-  Player.create(req.body).then(function (player) {
+app.post('/add/', function (req, res) {
+  Player.create(req.body)
+  .then(function (player) {
     res.redirect('/');
-  }).catch(function(error) {
-    let errorMsg;
-    if (error.code === DUPLICATE_RECORD_ERROR) {
-      // make message about duplicate
-      errorMsg = `The player name "${req.body.name}" has already been used.`
-    } else {
-      errorMsg = "You have encountered an unknown error."
-    }
-    res.render('new_player', {errorMsg: errorMsg});
   })
 });
 
-app.use('/:id', playerRouter);
 
-app.get('/', function(req, res) {
-  Player.find().then(function(players) {
+app.get('/:id/', function (req, res) {
+  Player.findOne({_id: req.params.id}).then(function (player) {
+    res.render("player_profile", {player: player});
+  })
+});
+
+app.get('/:id/update/', function (req, res) {
+  Player.findOne({_id: req.params.id}).then(function (player) {
+    res.render("update_player_profile", {player: player});
+  })
+});
+
+
+
+
+app.get('/:id/update/', function (req, res) {
+  Player.findOneAndUpdate({_id: req.params.id}, req,body).then(function (player) {
+    res.redirect("/");
+  })
+})
+
+app.get('/:id/add_stats/', function (req, res) {
+  Player.findOne({_id: req.params.id}).then(function (player) {
+    res.render("add_stats", {player: player});
+  })
+})
+
+app.post('/:id/add_stats/', function (req, res) {
+  Player.findOne({_id: req.params.id}).then(function (player) {
+    player.stats.push(req.body);
+    player.save().then(function () {
+      res.render("add_stats", {player: player});
+    })
+  })
+})
+
+app.post('/:id/delete', function (req, res) {
+  Player.findOneAndRemove({_id: req.params.id}).then(function (player) {
+    res.redirect('/');
+  })
+});
+
+
+app.get('/', function (req, res) {
+  Player.find().then(function (player) {
     res.render('index', {player: player});
   })
 })
+
+
+//app.post('/new/', function (req, res) {
+//  Player.create(req.body).then(function (player) {
+//    res.redirect('/');
+//  }).catch(function(error) {
+//    let errorMsg;
+//    if (error.code === DUPLICATE_RECORD_ERROR) {
+//      // make message about duplicate
+//      errorMsg = `The player name "${req.body.name}" has already been used.`
+//    } else {
+//      errorMsg = "You have encountered an unknown error."
+//    }
+//    res.render('new_player', {errorMsg: errorMsg});
+//  })
+//});
+
+//app.use('/:id', playerRouter);
+
+//app.get('/', function(req, res) {
+//  Player.find().then(function(players) {
+//    res.render('index', {player: player});
+//  })
+//})
 
 
 //app.get('/:id/', function (req, res) {
@@ -129,3 +189,8 @@ app.get('/', function(req, res) {
 //})
 
 module.exports = app;
+
+
+app.listen(port, function () {
+    console.log('Successfully started express application!')
+});

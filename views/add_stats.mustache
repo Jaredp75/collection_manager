@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Add Stats</title>
+    <link rel="stylesheet" type="text/css" href="./style.css">
+    <link rel="stylesheet" href="https://cdn.shoelace.style/1.0.0-beta21/shoelace.css">
+  </head>
+  <body>
+
+    {{#player}}
+
+    <h2>Add Stats for {{name}}</h2>
+
+    <form action="/{{_id}}/add_stats/" method="post">
+
+      {{#player}}
+      <ul>
+        <li>Rebounds Per Game: {{rpg}}</li>
+        <li>Points Per Game: {{ppg}}</li>
+        <li>Assists Per Game: {{apg}}</li>
+      </ul>
+      {{/player}}
+
+      <fieldset>
+        <legend>STATS</legend>
+
+        <p>
+          <label for="rebounds">Rebounds:</label>
+          <input type="text" id="rebounds" name="rebounds" />
+        </p>
+
+        <p>
+          <label for="points">Points:</label>
+          <input type="text" id="points" name="points" />
+        </p>
+
+        <p>
+          <label for="assists">Assists:</label>
+          <input type="text" id="assists" name="assists" />
+        </p>
+
+        <p>
+          <button type="submit">Add Stats</button>
+        </p>
+
+      </fieldset>
+
+    </form>
+
+    {{/player}}
+
+  </body>
+</html>

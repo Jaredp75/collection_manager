@@ -1,5 +1,12 @@
-.container {
-  max-width: 50rem;
-  margin: 2rem auto;
-  padding: 0 1rem;
+body {
+  font-family: sans-serif;
+  padding: 20px;
+}
+
+.button-info {
+  margin-bottom: 10px;
+}
+
+h2 {
+  font-weight: bolder;
 }

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Update Player Profile</title>
+    <link rel="stylesheet" type="text/css" href="./style.css">
+    <link rel="stylesheet" href="https://cdn.shoelace.style/1.0.0-beta21/shoelace.css">
+  </head>
+  <body>
+
+    {{#player}}
+
+    <h2>Update Player Profile for {{name}}</h2>
+
+    <form action="/{{_id}}/update/" method="post">
+      <fieldset>
+      <legend>GENERAL INFO</legend>
+
+      <p>
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required value="{{name}}" />
+      </p>
+
+      <p>
+        <label for="team">Team:</label>
+        <input type="text" id="team" name= "team" value="{{team}}" />
+      </p>
+
+      <p>
+        <label for="jerseyNumber">Jersey Number:</label>
+        <input type="text" id="jerseyNumber" name="jerseyNumber" value="{{jerseyNumber}}" />
+      </p>
+
+      <p>
+        <label for="age">Age:</label>
+        <input type="text" id="age" name="age" />
+      </p>
+
+      </fieldset>
+
+      <p>
+        <button type="submit" class="button-info">Update player profile</button>
+      </p>
+    </form>
+
+    {{/player}}
+
+  </body>
+</html>

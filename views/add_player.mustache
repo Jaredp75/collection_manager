@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Add a Player</title>
+    <link rel="stylesheet" type="text/css" href="./style.css">
+    <link rel="stylesheet" href="https://cdn.shoelace.style/1.0.0-beta21/shoelace.css">
+  </head>
+  <body>
+
+    <h2>Add a Player</h2>
+
+    <form action="/add/" method="post">
+      <fieldset>
+      <legend>GENERAL INFO</legend>
+
+      <p>
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required />
+      </p>
+
+      <p>
+        <label for="age">Age:</label>
+        <input type="text" id="age" name="age" />
+      </p>
+
+      <p>
+        <label for="team">Team:</label>
+        <input type="text" id="team" name="team" />
+      </p>
+
+      <p>
+        <label for="jerseyNumber">Jersey Number:</label>
+        <input type="text" id="jerseyNumber" name="jerseyNumber" />
+      </p>
+
+      </fieldset>
+
+      <p>
+        <button type="submit">Add Player</button>
+      </p>
+    </form>
+
+
+  </body>
+</html>

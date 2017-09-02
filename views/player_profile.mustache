@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title></title>
+
+  <link rel="stylesheet" type="text/css" href="./style.css">
+</head>
+<body>
+
+	{{#player}}
+	<h1>Player Profile: {{name}}</h1>
+
+		<div class="player_info">
+			<h3>Team: {{team}}</h3>
+			<h3>Jersey Number: {{jerseyNumber}}</h3>
+			<h3>Age: {{age}}</h3>
+		</div>
+		<hr>
+
+		<div class="stats">
+			<h2>Stats:</h2>
+			{{^stats}}
+			{{/stats}}
+			{{#stats}}
+			<ul>
+				<li>Rebounds Per Game: {{rpg}}</li>
+				<li>Points Per Game: {{ppg}}</li>
+				<li>Assists Per Game: {{apg}}</li>
+			</ul>
+			{{/stats}}
+		</div>
+		<button type="button" name="button" class="button_info"><a href="/{{_id}}/update/">Update Profile</a></button>
+
+		<hr>
+
+		<form action="/{{_id}}/delete/" method="post">
+			<button type="submit" name="button" class="button_warning">Delete Profile</button>
+		</form>
+
+		{{/player}}
+
+	</body>
+</html>
